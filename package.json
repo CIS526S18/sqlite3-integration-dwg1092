@@ -1,0 +1,23 @@
+{
+  "name": "sqlite3-integration-dwg1092",
+  "version": "1.0.0",
+  "description": "A simple dynamic webserver implementation",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CIS526S18/sqlite3-integration-dwg1092.git"
+  },
+  "author": "Douglas Garrett",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CIS526S18/sqlite3-integration-dwg1092/issues"
+  },
+  "homepage": "https://github.com/CIS526S18/sqlite3-integration-dwg1092#readme",
+  "dependencies": {
+    "sqlite3": "3.1.13"
+  }
+}

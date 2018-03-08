@@ -1,6 +1,12 @@
 /* load dependencies */
 const fs = require('fs');
 const escapeHTML = require('../helpers/escape-html');
+const sqlite3 = require('sqlite3');
+
+
+// create our database
+var db = new sqlite3.Database('./data/roster.sqlite3');
+
 
 // TODO: Add a removeStudent function
 
@@ -22,9 +28,12 @@ var students = JSON.parse(fs.readFileSync("data/students.json", {encoding: 'utf-
   * Provides a list of students
   * @return {Array} array of student objects
   */
-function getStudents() {
+function getStudents(callback) {
   // Clone and return the student object
-  return JSON.parse(JSON.stringify(students));
+  db.all("SELECT * FROM students;", function(err, rows){
+    callback(err, rows);
+  });
+  return [];
 }
 
 /** @function addStudent
@@ -46,11 +55,16 @@ function addStudent(student, callback) {
   // Add the student to the in-memory cache
   students.push(sanitizedStudent);
   // Save the cache to persistent storage (our JSON file)
-  fs.writeFile('data/students.json', JSON.stringify(students), 'utf-8', function(err) {
+  /*fs.writeFile('data/students.json', JSON.stringify(students), 'utf-8', function(err) {
     // If there was an error writing the student
     // to persistent storage, pass it along
     if(err) return callback(err);
     // Otherwise, trigger our callback with a clone of the student
     callback(false, JSON.parse(JSON.stringify(sanitizedStudent)))
+  });*/
+  db.run("INSERT INTO students(name, eid, discription) VALUES", function(err, rows){
+    sanitizedStudent.name + "','" +
+    sanitizedStudent.eid + "','" +
+    sanitizedStudent.description;
   });
 }
